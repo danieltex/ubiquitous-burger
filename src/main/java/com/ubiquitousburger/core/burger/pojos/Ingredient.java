@@ -1,4 +1,4 @@
-package com.ubiquitousburger.core.burger;
+package com.ubiquitousburger.core.burger.pojos;
 
 import java.util.Objects;
 

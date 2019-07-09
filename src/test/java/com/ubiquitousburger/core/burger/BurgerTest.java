@@ -1,6 +1,8 @@
 package com.ubiquitousburger.core.burger;
 
 import com.ubiquitousburger.core.burger.exceptions.NotEnoughIngredient;
+import com.ubiquitousburger.core.burger.pojos.Burger;
+import com.ubiquitousburger.core.burger.pojos.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -20,12 +22,7 @@ public class BurgerTest {
         // given burger
         queijo = new Ingredient("Queijo", 1.50);
         hamburguer = new Ingredient("Hambúrguer de carne", 3.00);
-
-        HashMap<Ingredient, Integer> ingredientMap = new HashMap<>();
-        ingredientMap.put(queijo, 1);
-        ingredientMap.put(hamburguer, 1);
-
-        xBurger = new Burger("X-Burger", ingredientMap);
+        xBurger = new Burger("X-Burger", queijo, hamburguer);
     }
 
     @Test

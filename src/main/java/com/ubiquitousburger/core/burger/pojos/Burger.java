@@ -1,17 +1,26 @@
-package com.ubiquitousburger.core.burger;
+package com.ubiquitousburger.core.burger.pojos;
 
 import com.ubiquitousburger.core.burger.exceptions.NotEnoughIngredient;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Burger {
     private final String name;
     private Map<Ingredient, Integer> ingredients;
 
-    protected Burger(String name, Map<Ingredient, Integer> ingredients) {
+    public Burger(String name, Map<Ingredient, Integer> ingredients) {
         this.name = name;
         this.ingredients = new HashMap<>(ingredients);
+    }
+
+    public Burger(String name, Ingredient... ingredients) {
+        this.name = name;
+        this.ingredients = new HashMap<>();
+        for (Ingredient ingredient : ingredients) {
+            add(ingredient, 1);
+        }
     }
 
     public String getName() {
@@ -52,6 +61,19 @@ public class Burger {
         } else {
             throw new NotEnoughIngredient(String.format("Burger has no %s", ingredient.getName()));
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Burger burger = (Burger) o;
+        return name.equals(burger.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     @Override
