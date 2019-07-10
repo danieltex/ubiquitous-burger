@@ -1,6 +1,6 @@
-package com.ubiquitousburger.core.burger.repositories;
+package com.ubiquitousburger.core.repositories;
 
-import com.ubiquitousburger.core.burger.pojos.Burger;
+import com.ubiquitousburger.core.pojos.Burger;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.ubiquitousburger.core;
 
-import com.ubiquitousburger.core.burger.pojos.Burger;
-import com.ubiquitousburger.core.burger.pojos.Ingredient;
-import com.ubiquitousburger.core.burger.repositories.BurgerRepository;
-import com.ubiquitousburger.core.burger.repositories.IngredientRepository;
+import com.ubiquitousburger.core.pojos.Burger;
+import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.repositories.BurgerRepository;
+import com.ubiquitousburger.core.repositories.IngredientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -26,11 +26,11 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         LOGGER.info("Pre-populating ingredients repository");
 
-        Ingredient alface = new Ingredient("Alface", 0.40);
-        Ingredient bacon = new Ingredient("Bacon", 2.00);
-        Ingredient hamburguer = new Ingredient("Hambúrguer de carne", 3.00);
-        Ingredient ovo = new Ingredient("Ovo", 0.80);
-        Ingredient queijo = new Ingredient("Queijo", 1.50);
+        Ingredient alface = new Ingredient("alface", 0.40);
+        Ingredient bacon = new Ingredient("bacon", 2.00);
+        Ingredient hamburguer = new Ingredient("hambúrguer de carne", 3.00);
+        Ingredient ovo = new Ingredient("ovo", 0.80);
+        Ingredient queijo = new Ingredient("queijo", 1.50);
 
         ingredientRepository.save(alface);
         ingredientRepository.save(bacon);

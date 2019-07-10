@@ -1,12 +1,11 @@
 package com.ubiquitousburger.core.burger;
 
-import com.ubiquitousburger.core.burger.exceptions.NotEnoughIngredient;
-import com.ubiquitousburger.core.burger.pojos.Burger;
-import com.ubiquitousburger.core.burger.pojos.Ingredient;
+import com.ubiquitousburger.core.exceptions.NotEnoughIngredientException;
+import com.ubiquitousburger.core.pojos.Burger;
+import com.ubiquitousburger.core.pojos.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -18,7 +17,7 @@ public class BurgerTest {
     private Burger xBurger;
 
     @BeforeEach
-    public void setUpTest() {
+    void setUpTest() {
         // given burger
         queijo = new Ingredient("Queijo", 1.50);
         hamburguer = new Ingredient("Hambúrguer de carne", 3.00);
@@ -26,21 +25,21 @@ public class BurgerTest {
     }
 
     @Test
-    public void testIngredientAddAndRemoval() {
+    void testIngredientAddAndRemoval() {
         // when we add
-        xBurger.add(queijo, 1);
+        xBurger.add(queijo.getName(), 1);
 
         // then we count
-        Map<Ingredient, Integer> currentIngredients = xBurger.getIngredients();
-        assertEquals(2, currentIngredients.get(queijo).intValue());
-        assertEquals(1, currentIngredients.get(hamburguer).intValue());
+        Map<String, Integer> currentIngredients = xBurger.getIngredients();
+        assertEquals(2, currentIngredients.get(queijo.getName()).intValue());
+        assertEquals(1, currentIngredients.get(hamburguer.getName()).intValue());
     }
 
     @Test
-    public void testRemovalExceeding() {
+    void testRemovalExceeding() {
         // when we remove an exceeding quantity we got an exception
-        NotEnoughIngredient notEnoughIngredient = assertThrows(NotEnoughIngredient.class,
-                () -> xBurger.remove(hamburguer, 2));
+        NotEnoughIngredientException notEnoughIngredient = assertThrows(NotEnoughIngredientException.class,
+                () -> xBurger.remove(hamburguer.getName(), 2));
 
         // than we assert the exception message
         assertEquals(String.format("Tried to remove %d %s but burger only had %d",
@@ -48,13 +47,13 @@ public class BurgerTest {
     }
 
     @Test
-    public void testRemovalNonExistent() {
+    void testRemovalNonExistent() {
         // given a new ingredient
         Ingredient unknown = new Ingredient("Unknown", 10.0);
 
         // when we remove a non existent ingredient we get an exception
-        NotEnoughIngredient notEnoughIngredient = assertThrows(NotEnoughIngredient.class,
-                () -> xBurger.remove(unknown, 2));
+        NotEnoughIngredientException notEnoughIngredient = assertThrows(NotEnoughIngredientException.class,
+                () -> xBurger.remove(unknown.getName(), 2));
 
         // than we assert message
         assertEquals(String.format("Burger has no %s", unknown.getName()), notEnoughIngredient.getMessage());

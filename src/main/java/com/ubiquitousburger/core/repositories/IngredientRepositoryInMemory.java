@@ -1,6 +1,6 @@
-package com.ubiquitousburger.core.burger.repositories;
+package com.ubiquitousburger.core.repositories;
 
-import com.ubiquitousburger.core.burger.pojos.Ingredient;
+import com.ubiquitousburger.core.pojos.Ingredient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import java.util.*;
 
 @Repository
 public class IngredientRepositoryInMemory implements IngredientRepository {
-    private static Logger LOGGER = LoggerFactory.getLogger(IngredientRepositoryInMemory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IngredientRepositoryInMemory.class);
     private Set<Ingredient> ingredients;
 
     public IngredientRepositoryInMemory() {

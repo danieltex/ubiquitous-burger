@@ -1,6 +1,6 @@
-package com.ubiquitousburger.core.burger.pojos;
+package com.ubiquitousburger.core.pojos;
 
-import com.ubiquitousburger.core.burger.exceptions.NotEnoughIngredient;
+import com.ubiquitousburger.core.exceptions.NotEnoughIngredientException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,18 +8,21 @@ import java.util.Objects;
 
 public class Burger {
     private final String name;
-    private Map<Ingredient, Integer> ingredients;
+    private Map<String, Integer> ingredients;
 
-    public Burger(String name, Map<Ingredient, Integer> ingredients) {
+    public Burger(String name, String... ingredients) {
         this.name = name;
-        this.ingredients = new HashMap<>(ingredients);
+        this.ingredients = new HashMap<>();
+        for (String ingredient : ingredients) {
+            add(ingredient, 1);
+        }
     }
 
     public Burger(String name, Ingredient... ingredients) {
         this.name = name;
         this.ingredients = new HashMap<>();
         for (Ingredient ingredient : ingredients) {
-            add(ingredient, 1);
+            add(ingredient.getName(), 1);
         }
     }
 
@@ -31,26 +34,35 @@ public class Burger {
      * A map of quantities for each ingredient on the burger
      * @return
      */
-    public Map<Ingredient, Integer> getIngredients() {
+    public Map<String, Integer> getIngredients() {
         return new HashMap<>(ingredients);
     }
 
-    public void add(Ingredient ingredient, int quantity) {
+    public void add(String ingredient, int quantity) {
         int currentQuantity = ingredients.getOrDefault(ingredient, 0);
         ingredients.put(ingredient, currentQuantity + quantity);
+    }
+
+    public boolean hasIngredient(String ingredientName) {
+        for (Map.Entry<String, Integer> entry : ingredients.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(ingredientName)) {
+                return entry.getValue() > 0;
+            }
+        }
+        return false;
     }
 
     /**
      *  Remove a quantity of ingredient from burger
      * @param ingredient
-     * @throws NotEnoughIngredient if not enought ingredients or burger does not contain ingredient
+     * @throws NotEnoughIngredientException if not enought ingredients or burger does not contain ingredient
      */
-    public void remove(Ingredient ingredient, int quantity) {
+    public void remove(String ingredient, int quantity) {
         if (ingredients.containsKey(ingredient)) {
             int currentQuantity = ingredients.get(ingredient);
             if (currentQuantity < quantity) {
-                throw new NotEnoughIngredient(String.format("Tried to remove %d %s but burger only had %d",
-                        quantity, ingredient.getName(), currentQuantity));
+                throw new NotEnoughIngredientException(String.format("Tried to remove %d %s but burger only had %d",
+                        quantity, ingredient, currentQuantity));
             }
 
             if (currentQuantity - quantity == 0) {
@@ -59,7 +71,7 @@ public class Burger {
                 ingredients.put(ingredient, currentQuantity - quantity);
             }
         } else {
-            throw new NotEnoughIngredient(String.format("Burger has no %s", ingredient.getName()));
+            throw new NotEnoughIngredientException(String.format("Burger has no %s", ingredient));
         }
     }
 
