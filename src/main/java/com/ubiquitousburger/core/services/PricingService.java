@@ -4,10 +4,12 @@ import com.ubiquitousburger.core.exceptions.NoDiscountAvailableException;
 import com.ubiquitousburger.core.pojos.Burger;
 import com.ubiquitousburger.core.pojos.Ingredient;
 import com.ubiquitousburger.core.repositories.IngredientRepository;
+import com.ubiquitousburger.core.services.discounts.Discount;
+import com.ubiquitousburger.core.services.discounts.LightDiscount;
+import com.ubiquitousburger.core.services.discounts.SoMuchOfDiscount;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,7 +19,8 @@ public class PricingService {
 
     private List<Discount> discountList = Arrays.asList(
             new LightDiscount(),
-            new SoMuchMeatDiscount()
+            new SoMuchOfDiscount("Muita carne","hambúrguer de carne"),
+            new SoMuchOfDiscount("Muito queijo","queijo")
     );
 
     private IngredientRepository ingredientRepository;

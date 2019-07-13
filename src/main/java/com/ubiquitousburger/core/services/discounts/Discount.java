@@ -1,4 +1,4 @@
-package com.ubiquitousburger.core.services;
+package com.ubiquitousburger.core.services.discounts;
 
 import com.ubiquitousburger.core.pojos.Burger;
 import com.ubiquitousburger.core.pojos.Ingredient;

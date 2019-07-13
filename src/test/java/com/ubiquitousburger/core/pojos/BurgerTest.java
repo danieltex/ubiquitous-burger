@@ -1,8 +1,6 @@
-package com.ubiquitousburger.core.burger;
+package com.ubiquitousburger.core.pojos;
 
 import com.ubiquitousburger.core.exceptions.NotEnoughIngredientException;
-import com.ubiquitousburger.core.pojos.Burger;
-import com.ubiquitousburger.core.pojos.Ingredient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
