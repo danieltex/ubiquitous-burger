@@ -8,11 +8,32 @@ class Burger extends React.Component {
         super(props);
     }
 
-    render() {
-        return (
-            <div>{this.props.burger.name}</div>
+    renderIngredients() {
+        const entries = Object.entries(this.props.burger.ingredients);
+        return entries.map(ing =>
+            <li>{ing[1]}: {ing[0]}</li>
         );
     }
+
+    onClickAdd() {
+        this.props.add(this.props.burger);
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="burger-name">{this.props.burger.name}</div>
+                <ul>
+                    {  this.renderIngredients() }
+                </ul>
+                <button onClick={ this.onClickAdd }>Adicionar</button>
+            </div>
+        );
+    }
+}
+
+class OrderItem extends React.Component {
+
 }
 
 class App extends React.Component {
@@ -21,6 +42,7 @@ class App extends React.Component {
         this.state = {
             burgers : {},
             isLoaded: false,
+            orderItems: {}
         };
     }
 
@@ -30,17 +52,16 @@ class App extends React.Component {
 
     makeRequest() {
         fetch("/burgers")
-            .then(result => {
-                return result.json();
-            })
+            .then(
+                result => result.json()
+            )
             .then( resultJson => {
                 this.setState({
                     burgers: resultJson,
                     isLoaded: true
-                })
-            }).catch(error => {
-                this.setState({error})
-            });
+                });
+            })
+            .catch(error => this.setState({error}));
     }
 
     render() {
