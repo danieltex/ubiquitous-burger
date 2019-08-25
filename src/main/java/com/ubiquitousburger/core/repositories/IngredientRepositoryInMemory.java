@@ -1,6 +1,6 @@
 package com.ubiquitousburger.core.repositories;
 
-import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.models.Ingredient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

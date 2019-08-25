@@ -1,7 +1,7 @@
 package com.ubiquitousburger.core;
 
-import com.ubiquitousburger.core.pojos.Burger;
-import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.models.Burger;
+import com.ubiquitousburger.core.models.Ingredient;
 import com.ubiquitousburger.core.repositories.BurgerRepository;
 import com.ubiquitousburger.core.repositories.IngredientRepository;
 import org.slf4j.Logger;

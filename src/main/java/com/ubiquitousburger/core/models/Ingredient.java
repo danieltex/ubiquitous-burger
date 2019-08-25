@@ -1,4 +1,4 @@
-package com.ubiquitousburger.core.pojos;
+package com.ubiquitousburger.core.models;
 
 import java.util.Objects;
 

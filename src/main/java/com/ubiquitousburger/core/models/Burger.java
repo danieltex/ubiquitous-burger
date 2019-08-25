@@ -1,4 +1,4 @@
-package com.ubiquitousburger.core.pojos;
+package com.ubiquitousburger.core.models;
 
 import com.ubiquitousburger.core.exceptions.NotEnoughIngredientException;
 

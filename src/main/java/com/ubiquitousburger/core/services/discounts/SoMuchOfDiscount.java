@@ -1,7 +1,7 @@
 package com.ubiquitousburger.core.services.discounts;
 
-import com.ubiquitousburger.core.pojos.Burger;
-import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.models.Burger;
+import com.ubiquitousburger.core.models.Ingredient;
 
 import java.util.Map;
 import java.util.Optional;

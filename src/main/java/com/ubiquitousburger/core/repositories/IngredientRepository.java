@@ -1,6 +1,6 @@
 package com.ubiquitousburger.core.repositories;
 
-import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.models.Ingredient;
 
 import java.util.List;
 

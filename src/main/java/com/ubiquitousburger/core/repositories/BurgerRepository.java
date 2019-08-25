@@ -1,6 +1,6 @@
 package com.ubiquitousburger.core.repositories;
 
-import com.ubiquitousburger.core.pojos.Burger;
+import com.ubiquitousburger.core.models.Burger;
 
 import java.util.List;
 

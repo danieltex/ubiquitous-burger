@@ -1,8 +1,8 @@
 package com.ubiquitousburger.core.services;
 
 import com.ubiquitousburger.core.exceptions.NoDiscountAvailableException;
-import com.ubiquitousburger.core.pojos.Burger;
-import com.ubiquitousburger.core.pojos.Ingredient;
+import com.ubiquitousburger.core.models.Burger;
+import com.ubiquitousburger.core.models.Ingredient;
 import com.ubiquitousburger.core.repositories.IngredientRepository;
 import com.ubiquitousburger.core.services.discounts.Discount;
 import com.ubiquitousburger.core.services.discounts.LightDiscount;
