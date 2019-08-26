@@ -13,16 +13,23 @@ function calcPrice(burger, ingredients) {
         .reduce((a, b) => a + b);
 }
 
+function renderIngredients(ingredients) {
+    return Object.entries(ingredients)
+        .map(entry => {
+            const [name, count] = entry;
+            if (count > 1) {
+                return name + "(" + count + ")";
+            } else {
+                return name;
+            }
+        })
+        .sort((a, b) => a.localeCompare(b))
+        .join(", ");
+}
+
 class Burger extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    renderIngredients() {
-        const entries = Object.entries(this.props.burger.ingredients);
-        return entries.map(ing =>
-            <li>{ing[1]}: {ing[0]}</li>
-        );
     }
 
     onClickAdd() {
@@ -31,15 +38,15 @@ class Burger extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="menu-item">
                 <div className="burger-name">{this.props.burger.name}</div>
                 <div>
                     {calcPrice(this.props.burger, this.props.ingredients)
                         .toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}
                 </div>
-                <ul>
-                    {  this.renderIngredients() }
-                </ul>
+                <div>
+                    {  renderIngredients(this.props.burger.ingredients) }
+                </div>
                 <button onClick={ () => this.onClickAdd() }>Adicionar</button>
             </div>
         );
@@ -50,13 +57,6 @@ class OrderItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {openIngredients: false}
-    }
-
-    renderBurgerIngredients() {
-        const entries = Object.entries(this.props.burger.ingredients);
-        return entries.map((ing,i) =>
-            <li key={i}>{ing[1]}: {ing[0]}</li>
-        );
     }
 
     toggleIngredients() {
@@ -121,11 +121,11 @@ class OrderItem extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="order-item">
                 <div className="burger-name">{this.props.burger.name}</div>
-                <ul>
-                    {  this.renderBurgerIngredients() }
-                </ul>
+                <div>{calcPrice(this.props.burger, this.props.ingredients)
+                    .toLocaleString("pt-BR", { style: 'currency', currency: 'BRL' })}</div>
+                <div>{ renderIngredients(this.props.burger.ingredients) }</div>
                 <button onClick={ () => this.props.remove() }>Remover</button>
                 {this.renderAvailablerIngredients()}
             </div>
@@ -209,6 +209,10 @@ class App extends React.Component {
         }))
     }
 
+    submitOrder() {
+
+    }
+
     render() {
         const {error, isLoaded, burgers, orderItems} = this.state;
         if (error) {
@@ -221,8 +225,8 @@ class App extends React.Component {
                     key={burger.name}
                     burger={burger}
                     ingredients={this.state.ingredients}
-                    add={(burger) => this.addOrderItem(burger)
-                    }/>
+                    add={(burger) => this.addOrderItem(burger)}
+                />
             );
             if (Object.keys(orderItems).length !== 0) {
                 burgerComponents.push(
@@ -239,6 +243,7 @@ class App extends React.Component {
                                 update={(id, burger) => this.updateOrder(id, burger)}
                             />)
                         }
+                        <button onClick={() => this.submitOrder()}>Gerar Pedido</button>
                     </div>
                 )
             }

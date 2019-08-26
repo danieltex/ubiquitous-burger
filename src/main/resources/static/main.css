@@ -5,3 +5,12 @@
 .collapse.in {
     display: block
 }
+
+.menu-item {
+    border: solid cadetblue;
+}
+
+.order-item {
+    border: solid yellowgreen;
+}
+
